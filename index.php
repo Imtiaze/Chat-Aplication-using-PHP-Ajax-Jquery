@@ -38,8 +38,29 @@ if (! isset($_SESSION['user_id']))
         <div class="table-responsive">
             <H4 align="center">Online User</H4>
             <p align='right'>Hi - <?php echo $_SESSION['username']; ?> - <a href="logout.php">Logout</a> </p>
+
+            <div id="user_details"></div>
         </div>
 
     </div>
+
+    <script>
+        $(document).ready(function() {
+
+            fetch_user();
+
+            function fetch_user()
+            { 
+                $.ajax({
+                    url: 'fetch-user.php',
+                    method: 'POST',
+                    success: function(data) {
+                        $('#user_details').html(data);
+                    }
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>
