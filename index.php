@@ -47,9 +47,14 @@ if (! isset($_SESSION['user_id']))
     <script>
         $(document).ready(function() {
 
-            fetch_user();
+            fetchUser();
 
-            function fetch_user()
+            setInterval(function(){
+                updateLastActivity();
+                fetchUser();
+            }, 5000);
+
+            function fetchUser()
             { 
                 $.ajax({
                     url: 'fetch-user.php',
@@ -59,6 +64,17 @@ if (! isset($_SESSION['user_id']))
                     }
                 });
             }
+
+            function updateLastActivity()
+            {
+                $.ajax({
+                    url: 'update-last-activity.php',
+                    success: function () {
+
+                    }
+                });
+            }
+
         });
     </script>
 
